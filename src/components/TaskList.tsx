@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   List,
   ListItem,
@@ -15,7 +15,7 @@ const TaskList = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   return (
-    <List>
+    <List sx={{ width: "100%" }}>
       {tasks.map((task) => (
         <ListItem
           key={task.id}
@@ -23,20 +23,27 @@ const TaskList = () => {
             <IconButton
               edge="end"
               onClick={() => dispatch(deleteTask(task.id))}
+              sx={{ fontSize: { xs: "1.5rem", md: "1rem" } }}
             >
-              <DeleteIcon />
+              <DeleteIcon fontSize="inherit" />
             </IconButton>
           }
+          sx={{
+            px: { xs: 1, md: 2 },
+            py: { xs: 0.5, md: 1 },
+          }}
         >
           <Checkbox
             checked={task.completed}
             onChange={() => dispatch(toggleTask(task.id))}
+            sx={{ transform: { xs: "scale(1.3)", md: "scale(1)" } }}
           />
           <ListItemText
             primary={task.title}
             sx={{
               textDecoration: task.completed ? "line-through" : "none",
               color: task.completed ? "gray" : "inherit",
+              fontSize: { xs: "0.95rem", md: "1rem" },
             }}
           />
         </ListItem>

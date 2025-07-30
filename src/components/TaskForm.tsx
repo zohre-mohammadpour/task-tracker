@@ -11,7 +11,6 @@ const TaskForm = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
-
     dispatch(addTask({ title }));
     setTitle("");
   };
@@ -22,8 +21,9 @@ const TaskForm = () => {
       onSubmit={handleSubmit}
       sx={{
         display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
         gap: 2,
-        alignItems: "center",
+        alignItems: { xs: "stretch", sm: "center" },
         mb: 4,
       }}
     >
@@ -33,8 +33,18 @@ const TaskForm = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
+        sx={{
+          fontSize: { xs: "0.9rem", md: "1rem" },
+        }}
       />
-      <Button type="submit" variant="contained">
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{
+          width: { xs: "100%", sm: "auto" },
+          fontSize: { xs: "0.9rem", md: "1rem" },
+        }}
+      >
         Add
       </Button>
     </Box>
