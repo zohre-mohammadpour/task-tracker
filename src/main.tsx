@@ -1,14 +1,22 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import { store } from "./redux/store.ts";
 import { Provider } from "react-redux";
+import { store } from "./redux/store.ts";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { pinkTheme, darkTheme } from "./theme";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+const RootApp = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  return (
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={darkMode ? darkTheme : pinkTheme}>
+        <CssBaseline />
+        <App darkMode={darkMode} setDarkMode={setDarkMode} />
+      </ThemeProvider>
     </Provider>
-  </StrictMode>
-);
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")!).render(<RootApp />);

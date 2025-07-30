@@ -1,29 +1,43 @@
-import { Container, Typography } from "@mui/material";
+import {
+  Container,
+  Typography,
+  AppBar,
+  Toolbar,
+  Switch,
+  Box,
+} from "@mui/material";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 
-function App() {
+interface AppProps {
+  darkMode: boolean;
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function App({ darkMode, setDarkMode }: AppProps) {
   return (
-    <Container
-      maxWidth="sm"
-      sx={{
-        pt: { xs: 2, md: 6 },
-        px: { xs: 1, sm: 2 },
-      }}
-    >
-      <Typography
-        variant="h4"
-        gutterBottom
-        sx={{
-          fontSize: { xs: "1.5rem", md: "2rem" },
-          textAlign: { xs: "center", md: "left" },
-        }}
+    <>
+      <AppBar position="static" color="primary">
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Typography variant="h6">Task Tracker</Typography>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Typography>Dark</Typography>
+            <Switch
+              checked={darkMode}
+              onChange={(e) => setDarkMode(e.target.checked)}
+              color="default"
+            />
+          </Box>
+        </Toolbar>
+      </AppBar>
+      <Container
+        maxWidth="sm"
+        sx={{ pt: { xs: 2, md: 6 }, px: { xs: 1, sm: 2 } }}
       >
-        Task Tracker
-      </Typography>
-      <TaskForm />
-      <TaskList />
-    </Container>
+        <TaskForm />
+        <TaskList />
+      </Container>
+    </>
   );
 }
 
